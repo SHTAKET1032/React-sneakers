@@ -10,11 +10,13 @@ html {
   padding: 0;
 }
 
+
 body {
   scroll-behavior: smooth;
   overflow-x: hidden;
   height: 100%;
 }
+
 
 button {
   background-color: inherit;
@@ -37,6 +39,9 @@ li {
   text-align: center;
 }
 
+
+///////////////////////////////////////////////////
+
 body {
   box-sizing: border-box;
   margin: 0;
@@ -45,6 +50,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: lightskyblue;
 }
+
+////////////////////////////////////////////////////
 
 .wrapper {
   margin: 50px auto;
@@ -56,39 +63,49 @@ body {
   box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.04);
 }
 
+////////////////////////////////////////////////////
+
 .content-top {
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  .search-container {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    border-radius: 10px;
+    border: 1px solid #F3F3F3;
+
+    .icon-search {
+      padding: 0 0 0 18px;
+    }
+
+    .input-search {
+      border: 0;
+      color: #000;
+      font-size: 14px;
+      font-weight: 400;
+      padding: 15px 0;
+      width: 200px;
+
+      &::placeholder {
+        color: #C4C4C4;
+      }
+    }
+  }
 }
-.content-top .search-container {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  border-radius: 10px;
-  border: 1px solid #F3F3F3;
-}
-.content-top .search-container .icon-search {
-  padding: 0 0 0 18px;
-}
-.content-top .search-container .input-search {
-  border: 0;
-  color: #000;
-  font-size: 14px;
-  font-weight: 400;
-  padding: 15px 0;
-  width: 200px;
-}
-.content-top .search-container .input-search::placeholder {
-  color: #C4C4C4;
-}
+
+
+////////////////////////////////////////////////////
+
 
 .sneakers-list {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   row-gap: 20px;
+  //column-gap: 5px;
   padding: 20px 0;
 }
 
-/*# sourceMappingURL=index.css.map */

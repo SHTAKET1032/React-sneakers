@@ -1,0 +1,32 @@
+.header {
+  padding: 43px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .header-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    .header-logo-img {
+      width: 40px;
+      height: 40px;
+    }
+
+  }
+
+  .header-right {
+    .header-list-items {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+
+      .header-list-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+    }
+  }
+}

@@ -1,25 +1,46 @@
-import logo from './logo.svg';
-import './App.css';
+import SneakerCard from "./components/Sneaker-card/Sneaker-card";
+import Header from "./components/Header/Header";
+import Drawer from "./components/Drawer/Drawer";
+
+
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <div className="wrapper">
+
+           <Drawer/>
+
+           <Header/>
+
+            <div className="content">
+
+
+                <div className="content-top">
+
+                    <h1>ВСЕ КРОССОВКИ</h1>
+                    <div className="search-container">
+                        <img src="/icons/search.svg" alt="icon-search" className="icon-search"/>
+                        <input placeholder="Поиск..." className="input-search"/>
+                    </div>
+
+                </div>
+
+                <div className="sneakers-list">
+
+                    <SneakerCard/>
+                    <SneakerCard/>
+                    <SneakerCard/>
+                    <SneakerCard/>
+                    <SneakerCard/>
+
+
+                </div>
+
+            </div>
+
+        </div>
+    );
 }
 
 export default App;

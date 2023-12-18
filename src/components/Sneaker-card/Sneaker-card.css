@@ -1,0 +1,41 @@
+.sneaker-card {
+  border-radius: 40px;
+  border: 1px solid #F3F3F3;
+  background: #FFF;
+  width: 210px;
+  padding: 29px;
+  transition: box-shadow 0.2s ease-in-out, scale 0.2s ease-in-out;
+}
+.sneaker-card:hover {
+  box-shadow: 0px 20px 35px rgba(0, 0, 0, 0.05);
+  scale: 105%;
+}
+.sneaker-card .favorite {
+  position: absolute;
+  cursor: pointer;
+}
+.sneaker-card .sneaker-card-img {
+  width: 133px;
+  height: 112px;
+}
+.sneaker-card .sneaker-card-name {
+  font-size: 14px;
+  font-weight: 400;
+  padding: 14px 0;
+}
+.sneaker-card .sneaker-card-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.sneaker-card .sneaker-card-bottom .price-container {
+  display: flex;
+  flex-direction: column;
+}
+.sneaker-card .sneaker-card-bottom .btn-plus {
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+}
+
+/*# sourceMappingURL=Sneaker-card.css.map */
