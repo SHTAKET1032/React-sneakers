@@ -3,7 +3,7 @@ import "./Header.scss"
 
 
 
-function Header(){
+function Header(props){
     return(
         <header className="header">
 
@@ -17,7 +17,8 @@ function Header(){
 
             <div className="header-right">
                 <ul className="header-list-items">
-                    <li className="header-list-item">
+                    <li onClick={props.openBasket}
+                        className="header-list-item">
                         <img src="/icons/basket.svg" alt="icon-basket" className="header-item-svg"/>
                         <span className="header-item-txt">1205 руб.</span>
                     </li>

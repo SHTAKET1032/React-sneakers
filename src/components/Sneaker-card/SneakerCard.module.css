@@ -1,4 +1,4 @@
-.sneaker-card {
+.sneakerCard {
   border-radius: 40px;
   border: 1px solid #F3F3F3;
   background: #FFF;
@@ -6,36 +6,36 @@
   padding: 29px;
   transition: box-shadow 0.2s ease-in-out, scale 0.2s ease-in-out;
 }
-.sneaker-card:hover {
+.sneakerCard:hover {
   box-shadow: 0px 20px 35px rgba(0, 0, 0, 0.05);
   scale: 105%;
 }
-.sneaker-card .favorite {
+.sneakerCard .favorite {
   position: absolute;
   cursor: pointer;
 }
-.sneaker-card .sneaker-card-img {
+.sneakerCard .cardImg {
   width: 133px;
   height: 112px;
 }
-.sneaker-card .sneaker-card-name {
+.sneakerCard .cardName {
   font-size: 14px;
   font-weight: 400;
   padding: 14px 0;
 }
-.sneaker-card .sneaker-card-bottom {
+.sneakerCard .cardBottom {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.sneaker-card .sneaker-card-bottom .price-container {
+.sneakerCard .cardBottom .priceContainer {
   display: flex;
   flex-direction: column;
 }
-.sneaker-card .sneaker-card-bottom .btn-plus {
+.sneakerCard .cardBottom .btnPlus {
   width: 32px;
   height: 32px;
   cursor: pointer;
 }
 
-/*# sourceMappingURL=Sneaker-card.css.map */
+/*# sourceMappingURL=SneakerCard.module.css.map */

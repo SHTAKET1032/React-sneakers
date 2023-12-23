@@ -1,6 +1,7 @@
 import SneakerCard from "./components/Sneaker-card/Sneaker-card";
 import Header from "./components/Header/Header";
 import Drawer from "./components/Drawer/Drawer";
+import {useState} from "react";
 
 
 
@@ -18,12 +19,15 @@ const data = [
 
 
 function App() {
+
+    const [isBasketOpen, setBasketOpen] = useState(false)
+
     return (
         <div className="wrapper">
 
-           <Drawer/>
+            {isBasketOpen && <Drawer closeBasket={()=>setBasketOpen(false)}/>}
 
-           <Header/>
+           <Header openBasket={()=>setBasketOpen(true)}/>
 
             <div className="content">
 
@@ -46,7 +50,8 @@ function App() {
                             name={item.name}
                             price={item.price}
                             imageUrl={item.imgUrl}
-                            priKlicke={()=>{console.log(`Вы кликнули на кроссовки ${item.name}`)}}
+                            onClickAdd={()=>{console.log(`Вы кликнули на кроссовки ${item.name}`)}}
+                            onClickfavorites={()=>{console.log(`Товар добавлен в избранное`)}}
                         />
                     ))}
 

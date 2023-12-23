@@ -1,4 +1,4 @@
-.sneaker-card {
+.sneakerCard {
   border-radius: 40px;
   border: 1px solid #F3F3F3;
   background: #FFF;
@@ -16,28 +16,28 @@
     cursor: pointer;
   }
 
-  .sneaker-card-img {
+  .cardImg {
     width: 133px;
     height: 112px;
   }
 
-  .sneaker-card-name {
+  .cardName {
     font-size: 14px;
     font-weight: 400;
     padding: 14px 0;
   }
 
-  .sneaker-card-bottom {
+  .cardBottom {
     display: flex;
     justify-content: space-between;
     align-items: center;
 
-    .price-container {
+    .priceContainer {
       display: flex;
       flex-direction: column;
     }
 
-    .btn-plus {
+    .btnPlus {
       width: 32px;
       height: 32px;
       cursor: pointer;
