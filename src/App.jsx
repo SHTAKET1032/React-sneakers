@@ -1,26 +1,24 @@
 import SneakerCard from "./components/Sneaker-card/Sneaker-card";
 import Header from "./components/Header/Header";
 import Drawer from "./components/Drawer/Drawer";
-import {useState} from "react";
-
-
-
-const data = [
-    {name: 'Nike Blazer Mid Suede', price: 12999, imgUrl: '/img-sneakers/1.jpg'},
-    {name: 'Nike Air Max 270', price: 12000, imgUrl: '/img-sneakers/2.jpg'},
-    {name: 'Under Armour Curry 8', price: 10000, imgUrl: '/img-sneakers/3.jpg'},
-    {name: 'Nike Kyrie 7', price: 15000, imgUrl: '/img-sneakers/4.jpg'},
-    {name: 'Jordan Air Jordan 11', price: 18000, imgUrl: '/img-sneakers/5.jpg'},
-    {name: 'Nike Lebron XVIII Low', price: 14500, imgUrl: '/img-sneakers/6.jpg'},
-    {name: 'Puma X Aka Boku Future Rider', price: 8900, imgUrl: '/img-sneakers/7.jpg'},
-    {name: 'Nike Kyrie Flytrap IV', price: 11900, imgUrl: '/img-sneakers/8.jpg'},
-]
+import {useEffect, useState} from "react";
 
 
 
 function App() {
 
-    const [isBasketOpen, setBasketOpen] = useState(false)
+    const [isBasketOpen, setBasketOpen] = useState(false);
+    const [data, setData] = useState([]);
+
+    useEffect(() => {
+        fetch("https://658727518ff2e26ee4e076e2.mockapi.io/items")
+            .then((response)=>{
+                return response.json()
+            })
+            .then((json)=>{
+                setData(json)
+            })
+    }, [])
 
     return (
         <div className="wrapper">
