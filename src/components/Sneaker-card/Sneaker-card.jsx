@@ -2,12 +2,15 @@ import style from "./SneakerCard.module.scss"
 import {useState} from "react";
 
 
-function SneakerCard(props) {
+function SneakerCard({onClickfavorites, imageUrl, name, price, id, onClickAdd}) {
+
     const [isAdded, setIsAdded] = useState(false);
 
     const onClickPlus = () => {
-        setIsAdded(!isAdded)
+        onClickAdd({imageUrl, name, price, id, isAdded, setIsAdded});
+        setIsAdded(!isAdded);
     }
+
 
 
     return(
@@ -17,20 +20,20 @@ function SneakerCard(props) {
                 <img
                     src="/icons/heart-default.svg"
                     alt="heart-unliked"
-                    onClick={props.onClickfavorites}/>
+                    onClick={onClickfavorites}/>
             </div>
 
             <img
-                src={props.imageUrl}
+                src={imageUrl}
                 alt="sneakers"
                 className={style.cardImg}/>
-            <h5 className={style.cardName}>{`Мужские Кроссовки ${props.name}`}</h5>
+            <h5 className={style.cardName}>{`Мужские Кроссовки ${name}`}</h5>
 
             <div className={style.cardBottom}>
 
                 <div className={style.priceContainer}>
                     <span className={style.priceTxt}>Цена:</span>
-                    <b className={style.priceNmb}>{props.price}.</b>
+                    <b className={style.priceNmb}>{price}.</b>
                 </div>
 
 

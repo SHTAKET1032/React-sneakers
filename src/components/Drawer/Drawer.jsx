@@ -1,7 +1,9 @@
 import "./Drawer.scss"
 
 
-function Drawer(props) {
+function Drawer({closeBasket, items = [], deleteFromBasket}) {
+
+
     return (
         <div className="overlay">
             <div className="drawer">
@@ -12,40 +14,29 @@ function Drawer(props) {
                         src="/icons/btn-remove.svg"
                         alt="remove"
                         className="btn-remove"
-                        onClick={props.closeBasket}/>
+                        onClick={closeBasket}/>
                 </div>
 
                 <div className="basketItems">
 
-                    <div className="basketItem">
-                        <img
-                            className="basketItem-img"
-                            src="/img-sneakers/1.jpg"
-                            alt="Sneakers"/>
-                        <div className="basketItem-info">
-                            <p>Мужские Кроссовки Nike Blazer Mid Suede</p>
-                            <b className="price-nmb">12 999 руб.</b>
+                    {items.map(item => (
+                        <div className="basketItem">
+                            <img
+                                className="basketItem-img"
+                                src={item.imageUrl}
+                                alt="Sneakers"/>
+                            <div className="basketItem-info">
+                                <p>{item.name}</p>
+                                <b className="price-nmb">{item.price} руб.</b>
+                            </div>
+                            <img
+                                src="/icons/btn-remove.svg"
+                                alt="remove"
+                                className="btn-remove"
+                                onClick={()=>deleteFromBasket(item.id)}
+                                />
                         </div>
-                        <img
-                            src="/icons/btn-remove.svg"
-                            alt="remove"
-                            className="btn-remove"/>
-                    </div>
-
-                    <div className="basketItem">
-                        <img
-                            className="basketItem-img"
-                            src="/img-sneakers/2.jpg"
-                            alt="Sneakers"/>
-                        <div className="basketItem-info">
-                            <p>Мужские Кроссовки Nike Air Max 270</p>
-                            <b className="price-nmb">12 999 руб.</b>
-                        </div>
-                        <img
-                            src="/icons/btn-remove.svg"
-                            alt="remove"
-                            className="btn-remove"/>
-                    </div>
+                    ))}
 
                 </div>
 

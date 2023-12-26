@@ -9,6 +9,7 @@ function App() {
 
     const [isBasketOpen, setBasketOpen] = useState(false);
     const [data, setData] = useState([]);
+    const [basketItems, setBasketItems] = useState([]);
 
     useEffect(() => {
         fetch("https://658727518ff2e26ee4e076e2.mockapi.io/items")
@@ -20,10 +21,23 @@ function App() {
             })
     }, [])
 
+    const onAddToBasket = (obj) => {
+        setBasketItems(prevVal=>[...prevVal, obj])
+        return obj
+    }
+
+    const removeFromBasket = (id) => {
+        setBasketItems(prevItems => [...prevItems.filter(item => item.id !== id)])
+    }
+
+
     return (
         <div className="wrapper">
 
-            {isBasketOpen && <Drawer closeBasket={()=>setBasketOpen(false)}/>}
+            {isBasketOpen && <Drawer items={basketItems}
+                                     closeBasket={()=>setBasketOpen(false)}
+                                     deleteFromBasket={removeFromBasket}
+            />}
 
            <Header openBasket={()=>setBasketOpen(true)}/>
 
@@ -43,12 +57,12 @@ function App() {
                 <div className="sneakers-list">
 
                     {data.map((item)=> (
-
                         <SneakerCard
                             name={item.name}
                             price={item.price}
                             imageUrl={item.imgUrl}
-                            onClickAdd={()=>{console.log(`Вы кликнули на кроссовки ${item.name}`)}}
+                            id={item.id}
+                            onClickAdd={onAddToBasket}
                             onClickfavorites={()=>{console.log(`Товар добавлен в избранное`)}}
                         />
                     ))}
