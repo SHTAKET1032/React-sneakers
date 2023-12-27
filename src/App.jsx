@@ -11,6 +11,7 @@ function App() {
     const [data, setData] = useState([]);
     const [basketItems, setBasketItems] = useState([]);
 
+
     useEffect(() => {
         fetch("https://658727518ff2e26ee4e076e2.mockapi.io/items")
             .then((response)=>{
@@ -23,13 +24,15 @@ function App() {
 
     const onAddToBasket = (obj) => {
         setBasketItems(prevVal=>[...prevVal, obj])
-        return obj
     }
 
     const removeFromBasket = (id) => {
         setBasketItems(prevItems => [...prevItems.filter(item => item.id !== id)])
     }
 
+    const isItemInBasket = (id) => {
+        return basketItems.some(item => item.id === id)
+    }
 
     return (
         <div className="wrapper">
@@ -64,6 +67,7 @@ function App() {
                             id={item.id}
                             onClickAdd={onAddToBasket}
                             onClickfavorites={()=>{console.log(`Товар добавлен в избранное`)}}
+                            isAddedToBasket={isItemInBasket(item.id)}
                         />
                     ))}
 

@@ -3,7 +3,6 @@ import "./Drawer.scss"
 
 function Drawer({closeBasket, items = [], deleteFromBasket}) {
 
-
     return (
         <div className="overlay">
             <div className="drawer">

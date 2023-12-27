@@ -1,15 +1,23 @@
 import style from "./SneakerCard.module.scss"
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 
-function SneakerCard({onClickfavorites, imageUrl, name, price, id, onClickAdd}) {
+function SneakerCard({onClickfavorites, imageUrl, name, price, id, onClickAdd, isAddedToBasket}) {
 
-    const [isAdded, setIsAdded] = useState(false);
+    const [isAdded, setIsAdded] = useState(isAddedToBasket);
+
 
     const onClickPlus = () => {
-        onClickAdd({imageUrl, name, price, id, isAdded, setIsAdded});
-        setIsAdded(!isAdded);
+        if(isAdded){
+            return
+        }
+        setIsAdded(true);
+        onClickAdd({imageUrl, name, price, id});
     }
+
+    useEffect(()=>{
+        setIsAdded(isAddedToBasket)
+    }, [isAddedToBasket])
 
 
 
