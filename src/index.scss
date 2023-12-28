@@ -71,6 +71,7 @@ body {
   justify-content: space-between;
 
   .search-container {
+    position: relative;
     display: flex;
     align-items: center;
     gap: 14px;
@@ -88,9 +89,19 @@ body {
       font-weight: 400;
       padding: 15px 0;
       width: 200px;
+      outline: none;
 
       &::placeholder {
         color: #C4C4C4;
+      }
+    }
+    .cross{
+      width: 20px;
+      height: 20px;
+      margin-right: 10px;
+      cursor: pointer;
+      &:hover{
+        box-shadow: 0px 0px 15px 3px rgba(34, 60, 80, 0.41);
       }
     }
   }

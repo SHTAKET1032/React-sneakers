@@ -19,7 +19,7 @@ function Drawer({closeBasket, items = [], deleteFromBasket}) {
                 <div className="basketItems">
 
                     {items.map(item => (
-                        <div className="basketItem">
+                        <div className="basketItem" key={item.id}>
                             <img
                                 className="basketItem-img"
                                 src={item.imageUrl}
