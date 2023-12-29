@@ -3,6 +3,7 @@ import SneakerCard from "./components/Sneaker-card/Sneaker-card";
 import Header from "./components/Header/Header";
 import Drawer from "./components/Drawer/Drawer";
 import {useEffect, useState} from "react";
+import axios from "axios";
 
 
 
@@ -15,20 +16,24 @@ function App() {
 
 
     useEffect(() => {
-        fetch("https://658727518ff2e26ee4e076e2.mockapi.io/items")
-            .then((response)=>{
-                return response.json()
-            })
-            .then((json)=>{
-                setData(json)
-            })
+        // fetch("https://658727518ff2e26ee4e076e2.mockapi.io/items")
+        //     .then((response)=>{
+        //         return response.json()
+        //     })
+        //     .then((json)=>{
+        //         setData(json)
+        //     })
+        axios.get("https://658727518ff2e26ee4e076e2.mockapi.io/items").then((res)=>{setData(res.data)})
+        axios.get("https://658727518ff2e26ee4e076e2.mockapi.io/basket").then((res)=>{setBasketItems(res.data)})
     }, [])
 
     const onAddToBasket = (obj) => {
+        axios.post("https://658727518ff2e26ee4e076e2.mockapi.io/basket", obj);
         setBasketItems(prevVal=>[...prevVal, obj])
     }
 
     const removeFromBasket = (id) => {
+        axios.delete(`https://658727518ff2e26ee4e076e2.mockapi.io/basket/${id}`);
         setBasketItems(prevItems => [...prevItems.filter(item => item.id !== id)])
     }
 
