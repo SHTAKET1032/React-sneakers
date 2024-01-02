@@ -25,13 +25,13 @@
   align-items: center;
   padding: 0 0 30px 0;
 }
-.overlay .drawer .drawerTitle .btn-remove {
+.overlay .drawer .drawerTitle .btnRemove {
   width: 32px;
   height: 32px;
   opacity: 0.5;
   cursor: pointer;
 }
-.overlay .drawer .drawerTitle .btn-remove:hover {
+.overlay .drawer .drawerTitle .btnRemove:hover {
   opacity: 1;
 }
 
@@ -49,7 +49,7 @@
   align-items: center;
   gap: 20px;
 }
-.basketItems .basketItem .basketItem-img {
+.basketItems .basketItem .basketItemImg {
   width: 70px;
   height: 70px;
 }
@@ -57,21 +57,21 @@
   margin-top: 15px;
   padding: 0 0 10px 0;
 }
-.basketItems .basketItem .btn-remove {
+.basketItems .basketItem .btnRemove {
   width: 32px;
   height: 32px;
   opacity: 0.5;
   cursor: pointer;
 }
-.basketItems .basketItem .btn-remove:hover {
+.basketItems .basketItem .btnRemove:hover {
   opacity: 1;
 }
 
-.basketInfo-item {
+.basketInfoItem {
   display: flex;
   margin: 15px;
 }
-.basketInfo-item div {
+.basketInfoItem div {
   flex: 1;
   margin: 0 20px;
   border-bottom: 1px dashed #DFDFDF;
@@ -79,7 +79,7 @@
   top: -5px;
 }
 
-.checkout-btn {
+.checkoutBtn {
   position: relative;
   margin-top: 15px;
   background-color: #9DD458;
@@ -90,14 +90,43 @@
   font-size: 16px;
   font-weight: 600;
 }
-.checkout-btn .arrowIcon {
+.checkoutBtn .arrowIcon {
   position: absolute;
   top: 23px;
   right: 35px;
   transition: transform 0.5s ease-in-out;
 }
-.checkout-btn:hover .arrowIcon {
+.checkoutBtn:hover .arrowIcon {
   transform: translateX(10px);
 }
 
-/*# sourceMappingURL=Drawer.css.map */
+.emptyBasket {
+  margin-top: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  flex: 1;
+}
+.emptyBasket h3 {
+  font-size: 22px;
+  font-weight: 600;
+}
+.emptyBasket p {
+  text-align: center;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  opacity: 0.4;
+}
+.emptyBasket .checkoutBtn {
+  width: 100%;
+}
+.emptyBasket .checkoutBtn .arrowIcon {
+  left: 35px;
+}
+.emptyBasket .checkoutBtn:hover .arrowIcon {
+  transform: translateX(-10px);
+}
+
+/*# sourceMappingURL=Drawer.module.css.map */

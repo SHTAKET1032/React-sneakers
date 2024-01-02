@@ -41,7 +41,7 @@ function SneakerCard({onClickfavorites, imageUrl, name, price, id, onClickAdd, i
 
                 <div className={style.priceContainer}>
                     <span className={style.priceTxt}>Цена:</span>
-                    <b className={style.priceNmb}>{price}.</b>
+                    <b className={style.priceNmb}>{price}p.</b>
                 </div>
 
 
