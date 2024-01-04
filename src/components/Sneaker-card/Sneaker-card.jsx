@@ -2,9 +2,10 @@ import style from "./SneakerCard.module.scss"
 import {useEffect, useState} from "react";
 
 
-function SneakerCard({onClickfavorites, imageUrl, name, price, id, onClickAdd, isAddedToBasket}) {
+function SneakerCard({onAddToFavorite, imageUrl, name, price, id, onClickAdd, isAddedToBasket}) {
 
     const [isAdded, setIsAdded] = useState(isAddedToBasket);
+    const [isLiked, setIsLiked] = useState(false)
 
 
     const onClickPlus = () => {
@@ -13,6 +14,14 @@ function SneakerCard({onClickfavorites, imageUrl, name, price, id, onClickAdd, i
         }
         setIsAdded(true);
         onClickAdd({imageUrl, name, price, id});
+    }
+
+    const onClickFavorite = () => {
+        if(isLiked){
+            return
+        }
+        setIsLiked(true);
+        onAddToFavorite({imageUrl, name, price, id})
     }
 
     useEffect(()=>{
@@ -26,9 +35,9 @@ function SneakerCard({onClickfavorites, imageUrl, name, price, id, onClickAdd, i
 
             <div className={style.favorite}>
                 <img
-                    src="/icons/heart-default.svg"
+                    src={!isLiked ? "/icons/heart-default.svg" : "/icons/heart-liked.svg"}
                     alt="heart-unliked"
-                    onClick={onClickfavorites}/>
+                    onClick={onClickFavorite}/>
             </div>
 
             <img

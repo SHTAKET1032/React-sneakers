@@ -1,13 +1,16 @@
+import {Link} from "react-router-dom";
+
 import "./Header.scss"
 
 
-
-function Header({openBasket}){
-    return(
+function Header({openBasket}) {
+    return (
         <header className="header">
 
             <div className="header-left">
-                <img src="/icons/main-logo.png" className="header-logo-img" alt="main-logo"/>
+                <Link to="/">
+                    <img src="/icons/main-logo.png" className="header-logo-img" alt="main-logo"/>
+                </Link>
                 <div className="header-txt">
                     <h3>REACT SNEAKERS</h3>
                     <p>Магазин лучших кроссовок</p>
@@ -21,10 +24,12 @@ function Header({openBasket}){
                         <img src="/icons/basket.svg" alt="icon-basket" className="header-item-svg"/>
                         <span className="header-item-txt">1205 руб.</span>
                     </li>
-                    <li className="header-list-item">
-                        <img src="/icons/favorite.svg" alt="icon-favor" className="header-item-svg"/>
-                        <span className="header-item-txt">Закладки</span>
-                    </li>
+                    <Link to="/favorites">
+                        <li className="header-list-item">
+                            <img src="/icons/favorite.svg" alt="icon-favor" className="header-item-svg"/>
+                            <span className="header-item-txt">Закладки</span>
+                        </li>
+                    </Link>
                     <li className="header-list-item">
                         <img src="/icons/profile.svg" alt="icon-profile" className="header-item-svg"/>
                         <span className="header-item-txt">Профиль</span>

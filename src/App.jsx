@@ -1,10 +1,11 @@
+import axios from "axios";
+import {Route, Routes} from "react-router-dom";
+import {useEffect, useState} from "react";
 
-import SneakerCard from "./components/Sneaker-card/Sneaker-card";
 import Header from "./components/Header/Header";
 import Drawer from "./components/Drawer/Drawer";
-import {useEffect, useState} from "react";
-import axios from "axios";
-
+import Home from "./pages/Home";
+import Favorites from "./pages/Favorites";
 
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
     const [isBasketOpen, setBasketOpen] = useState(false);
     const [data, setData] = useState([]);
     const [basketItems, setBasketItems] = useState([]);
+    const [favorites, setFavorites] = useState([]);
     const [searchValue, setSearchValue] = useState('')
 
 
@@ -23,13 +25,17 @@ function App() {
         //     .then((json)=>{
         //         setData(json)
         //     })
-        axios.get("https://658727518ff2e26ee4e076e2.mockapi.io/items").then((res)=>{setData(res.data)})
-        axios.get("https://658727518ff2e26ee4e076e2.mockapi.io/basket").then((res)=>{setBasketItems(res.data)})
+        axios.get("https://658727518ff2e26ee4e076e2.mockapi.io/items").then((res) => {
+            setData(res.data)
+        })
+        axios.get("https://658727518ff2e26ee4e076e2.mockapi.io/basket").then((res) => {
+            setBasketItems(res.data)
+        })
     }, [])
 
     const onAddToBasket = (obj) => {
         axios.post("https://658727518ff2e26ee4e076e2.mockapi.io/basket", obj);
-        setBasketItems(prevVal=>[...prevVal, obj])
+        setBasketItems(prevVal => [...prevVal, obj])
     }
 
     const removeFromBasket = (id) => {
@@ -37,16 +43,21 @@ function App() {
         setBasketItems(prevItems => [...prevItems.filter(item => item.id !== id)])
     }
 
+    const onAddToFavorite = (obj) => {
+        axios.post("https://65958c3804335332df82f0ba.mockapi.io/sneakers/2/favorites", obj);
+        setFavorites(prevVal => [...prevVal, obj])
+    }
+
     const isItemInBasket = (id) => {
         return basketItems.some(item => item.id === id)
     }
 
-    const onChangeSearchInput = (event)=>{
+    const onChangeSearchInput = (event) => {
         setSearchValue(event.target.value)
         console.log(event.target.value)
     }
 
-    const deleteInputValue = () =>{
+    const deleteInputValue = () => {
         setSearchValue('')
         console.log(searchValue)
     }
@@ -55,53 +66,36 @@ function App() {
         <div className="wrapper">
 
             {isBasketOpen && <Drawer items={basketItems}
-                                     closeBasket={()=>setBasketOpen(false)}
+                                     closeBasket={() => setBasketOpen(false)}
                                      deleteFromBasket={removeFromBasket}
             />}
 
-           <Header openBasket={()=>setBasketOpen(true)}/>
+            <Header openBasket={() => setBasketOpen(true)}/>
 
-            <div className="content">
-
-
-                <div className="content-top">
-
-                    <h1>{searchValue ? `Ищем "${searchValue}"` : "ВСЕ КРОССОВКИ"}</h1>
-                    <div className="search-container">
-                        <img src="/icons/search.svg" alt="icon-search" className="icon-search"/>
-                        <input onChange={onChangeSearchInput}
-                               value={searchValue}
-                               type={"text"}
-                               placeholder="Поиск..."
-                               className="input-search"/>
-                        {searchValue && <img src="/icons/cross.png"
-                                             className="cross"
-                                             alt="cross"
-                                             onClick={deleteInputValue}
-                        />}
-                    </div>
-
-                </div>
-
-                <div className="sneakers-list">
-
-                    {data.filter(item=>item.name.toLowerCase().includes(searchValue.toLowerCase()))
-                        .map((item)=> (
-                        <SneakerCard
-                            key={item.id}
-                            name={item.name}
-                            price={item.price}
-                            imageUrl={item.imgUrl}
-                            id={item.id}
-                            onClickAdd={onAddToBasket}
-                            onClickfavorites={()=>{console.log(`Товар добавлен в избранное`)}}
-                            isAddedToBasket={isItemInBasket(item.id)}
+            <Routes>
+                <Route path='/' exact
+                    element={
+                        <Home
+                            data={data}
+                            searchValue={searchValue}
+                            onChangeSearchInput={onChangeSearchInput}
+                            deleteInputValue={deleteInputValue}
+                            onAddToBasket={onAddToBasket}
+                            onAddToFavorite={onAddToFavorite}
+                            isItemInBasket={isItemInBasket}
                         />
-                    ))}
+                    }
+                />
+            </Routes>
 
-                </div>
+            <Routes>
+                <Route path='/favorites' exact
+                    element={
+                        <Favorites/>
+                    }
+                />
+            </Routes>
 
-            </div>
 
         </div>
     );

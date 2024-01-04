@@ -1,4 +1,7 @@
+// import {Link} from "react-router-dom";
+
 import style from "./Drawer.module.scss"
+
 
 
 function Drawer({closeBasket, items = [], deleteFromBasket}) {
