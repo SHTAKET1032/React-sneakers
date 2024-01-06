@@ -36,16 +36,16 @@ function Home({
             <div className="sneakers-list">
 
                 {data.filter(item => item.name.toLowerCase().includes(searchValue.toLowerCase()))
-                    .map((item) => (
+                    .map(({id, name, price, imgUrl}) => (
                         <SneakerCard
-                            key={item.id}
-                            name={item.name}
-                            price={item.price}
-                            imageUrl={item.imgUrl}
-                            id={item.id}
+                            key={id}
+                            name={name}
+                            price={price}
+                            imageUrl={imgUrl}
+                            id={id}
                             onClickAdd={onAddToBasket}
                             onAddToFavorite={onAddToFavorite}
-                            isAddedToBasket={isItemInBasket(item.id)}
+                            isAddedToBasket={isItemInBasket(id)}
                         />
                     ))}
 

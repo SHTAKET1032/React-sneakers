@@ -2,14 +2,24 @@ import style from "./SneakerCard.module.scss"
 import {useEffect, useState} from "react";
 
 
-function SneakerCard({onAddToFavorite, imageUrl, name, price, id, onClickAdd, isAddedToBasket}) {
+function SneakerCard({
+                         onAddToFavorite,
+                         imageUrl,
+                         name,
+                         price,
+                         id,
+                         onClickAdd,
+                         isAddedToBasket,
+                         liked = false
+                     }) {
 
     const [isAdded, setIsAdded] = useState(isAddedToBasket);
-    const [isLiked, setIsLiked] = useState(false)
+    const [isLiked, setIsLiked] = useState(liked)
+
 
 
     const onClickPlus = () => {
-        if(isAdded){
+        if (isAdded) {
             return
         }
         setIsAdded(true);
@@ -17,20 +27,19 @@ function SneakerCard({onAddToFavorite, imageUrl, name, price, id, onClickAdd, is
     }
 
     const onClickFavorite = () => {
-        if(isLiked){
-            return
-        }
-        setIsLiked(true);
+        // if (isLiked) {
+        //     return
+        // }
+        setIsLiked(!liked);
         onAddToFavorite({imageUrl, name, price, id})
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         setIsAdded(isAddedToBasket)
     }, [isAddedToBasket])
 
 
-
-    return(
+    return (
         <div className={style.sneakerCard}>
 
             <div className={style.favorite}>

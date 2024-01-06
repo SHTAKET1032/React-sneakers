@@ -1,7 +1,11 @@
 
+import SneakerCard from "../components/Sneaker-card/Sneaker-card";
+// import {useEffect} from "react";
 
-
-function Favorites() {
+function Favorites({items, onAddToFavorite, onAddToBasket}) {
+    // useEffect(()=>{
+    //     console.log(items)
+    // }, [])
     return (
         <div className="content">
 
@@ -13,7 +17,22 @@ function Favorites() {
             </div>
 
             <div className="sneakers-list">
-                Тут будут мои закладки
+                {items.length < 1 ? (
+                    "Тут будут мои закладки"
+                ) : (
+                    items.map(({id, name, price, imageUrl}) => (
+                        <SneakerCard
+                            key={id}
+                            name={name}
+                            price={price}
+                            imageUrl={imageUrl}
+                            id={id}
+                            liked={true}
+                            onClickAdd={onAddToBasket}
+                            onAddToFavorite={onAddToFavorite}/>
+                    ))
+                )
+                }
             </div>
 
         </div>
