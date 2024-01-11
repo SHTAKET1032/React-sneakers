@@ -14,7 +14,8 @@ function App() {
     const [data, setData] = useState([]);
     const [basketItems, setBasketItems] = useState([]);
     const [favorites, setFavorites] = useState([]);
-    const [searchValue, setSearchValue] = useState('')
+    const [searchValue, setSearchValue] = useState('');
+    const [isLoading, setIsLoading] = useState(true)
 
 
     useEffect(() => {
@@ -25,16 +26,25 @@ function App() {
         //     .then((json)=>{
         //         setData(json)
         //     })
-        axios.get("https://658727518ff2e26ee4e076e2.mockapi.io/items").then((res) => {
-            setData(res.data)
-        })
-        axios.get("https://658727518ff2e26ee4e076e2.mockapi.io/basket").then((res) => {
-            setBasketItems(res.data)
-        })
 
-        axios.get("https://65958c3804335332df82f0ba.mockapi.io/sneakers/2/favorites").then((res) => {
-            setFavorites(res.data)
-        })
+        async function fetchData(){
+            try {
+                setIsLoading(true)
+
+                const dataResponse = await axios.get("https://658727518ff2e26ee4e076e2.mockapi.io/items");
+                const basketResponse = await axios.get("https://658727518ff2e26ee4e076e2.mockapi.io/basket");
+                const favoritesResponse = await axios.get("https://65958c3804335332df82f0ba.mockapi.io/sneakers/2/favorites");
+
+                setIsLoading(false)
+                setData(dataResponse.data)
+                setBasketItems(basketResponse.data)
+                setFavorites(favoritesResponse.data)
+            } catch (error){
+                alert('Ошибка при запросе данных ;(');
+                console.error(error);
+            }
+        }
+        fetchData();
     }, [])
 
     const onAddToBasket = (obj) => {
@@ -61,13 +71,9 @@ function App() {
         }
     }
 
-    // const removeFromFavorite = (id) => {
-    //     axios.delete(`https://65958c3804335332df82f0ba.mockapi.io/sneakers/2/favorites/${id}`);
-    //     setFavorites(prevItems => [...prevItems.filter(item => item.id !== id)])
-    // }
 
     const isItemInBasket = (id) => {
-        return basketItems.some(item => item.id === id)
+        return basketItems.some(item => Number(item.id) === Number(id))
     }
 
     const onChangeSearchInput = (event) => {
@@ -77,6 +83,7 @@ function App() {
     const deleteInputValue = () => {
         setSearchValue('')
     }
+
 
 
     return (
@@ -94,12 +101,14 @@ function App() {
                     element={
                         <Home
                             data={data}
+                            basketItems={basketItems}
                             searchValue={searchValue}
                             onChangeSearchInput={onChangeSearchInput}
                             deleteInputValue={deleteInputValue}
                             onAddToBasket={onAddToBasket}
                             onAddToFavorite={onAddToFavorite}
                             isItemInBasket={isItemInBasket}
+                            isLoading={isLoading}
                         />
                     }
                 />

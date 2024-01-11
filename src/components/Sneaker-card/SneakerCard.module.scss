@@ -1,7 +1,9 @@
 .sneakerCard {
+  position: relative;
+  color: #FFF;
   border-radius: 40px;
-  border: 1px solid #F3F3F3;
-  background: #FFF;
+  border: 3px solid #F3F3F3;
+  background: #040429;
   width: 210px;
   padding: 29px;
   transition: box-shadow 0.2s ease-in-out, scale 0.2s ease-in-out;
