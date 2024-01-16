@@ -97,7 +97,7 @@ function Home({
         return (
             (isLoading ? [...Array(12)] : filtredItems).map((item, index) => (
                 <SneakerCard
-                    key={index}
+                    key={item?.id}
                     onAddToFavorite={onAddToFavorite}
                     onClickAdd={onAddToBasket}
                     added={isItemAdded(item?.id)}

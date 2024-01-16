@@ -2,17 +2,16 @@
 
 import style from "./Drawer.module.scss"
 import Info from "../info/info";
-import {useContext, useState} from "react";
-import {AppContext} from "../../App";
+import {useState} from "react";
+// import {AppContext} from "../../App";
 import axios from "axios";
+import {useBasket} from "../../hooks/useBasket";
 
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
 
 
 function Drawer({closeBasket, items = [], deleteFromBasket}) {
-
-
-    const {basketItems ,setBasketItems} = useContext(AppContext)
+    const {basketItems ,setBasketItems, priceOfAllItemsInBasket} = useBasket()
     const [isOrderComplete, setIsOrderComplete] = useState(false)
     const [orderId, setOrderId] = useState(null)
     const [isLoading, setIsLoading] = useState(false)
@@ -63,7 +62,7 @@ function Drawer({closeBasket, items = [], deleteFromBasket}) {
                                             alt="Sneakers"/>
                                         <div className={style.basketItemInfo}>
                                             <p>{item.name}</p>
-                                            <b className="price-nmb">{item.price} руб.</b>
+                                            <b className="price-nmb">{item.price} &#8381;</b>
                                         </div>
                                         <img
                                             src="/icons/btn-remove.svg"
@@ -80,12 +79,12 @@ function Drawer({closeBasket, items = [], deleteFromBasket}) {
                                 <li className={style.basketInfoItem}>
                                     <span>Итого: </span>
                                     <div></div>
-                                    <b>21 498 руб. </b>
+                                    <b>{priceOfAllItemsInBasket + priceOfAllItemsInBasket * 0.05} &#8381;</b>
                                 </li>
                                 <li className={style.basketInfoItem}>
-                                    <span>Налог 5%: </span>
+                                    <span>Доставка 5% от заказа: </span>
                                     <div></div>
-                                    <b>1074 руб. </b>
+                                    <b>{priceOfAllItemsInBasket * 0.05} &#8381;</b>
                                 </li>
                             </ul>
 

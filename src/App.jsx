@@ -91,6 +91,11 @@ function App() {
     }
 
 
+    const priceOfAllItemsInBasket = basketItems.reduce((accum, item)=>{
+        return accum + item.price
+    }, 0)
+
+
     return (
         <div className="wrapper">
             <AppContext.Provider value={{
@@ -99,7 +104,8 @@ function App() {
                 favorites,
                 isItemAdded,
                 setBasketOpen,
-                setBasketItems
+                setBasketItems,
+                priceOfAllItemsInBasket
             }}>
                 {isBasketOpen && <Drawer items={basketItems}
                                          closeBasket={() => setBasketOpen(false)}
