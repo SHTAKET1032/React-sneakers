@@ -1,11 +1,13 @@
 import axios from "axios";
 import {Route, Routes} from "react-router-dom";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 
 import Header from "./components/Header/Header";
 import Drawer from "./components/Drawer/Drawer";
 import Home from "./pages/Home";
 import Favorites from "./pages/Favorites";
+
+export const AppContext = React.createContext({})
 
 
 function App() {
@@ -27,7 +29,7 @@ function App() {
         //         setData(json)
         //     })
 
-        async function fetchData(){
+        async function fetchData() {
             try {
                 setIsLoading(true)
 
@@ -39,11 +41,12 @@ function App() {
                 setData(dataResponse.data)
                 setBasketItems(basketResponse.data)
                 setFavorites(favoritesResponse.data)
-            } catch (error){
+            } catch (error) {
                 alert('Ошибка при запросе данных ;(');
                 console.error(error);
             }
         }
+
         fetchData();
     }, [])
 
@@ -59,14 +62,13 @@ function App() {
 
     const onAddToFavorite = async (obj) => {
         try {
-            if(favorites.find((favObj) => favObj.id === obj.id)){
+            if (favorites.find((favObj) => favObj.id === obj.id)) {
                 axios.delete(`https://65958c3804335332df82f0ba.mockapi.io/sneakers/2/favorites/${obj.id}`)
             } else {
                 const {data} = await axios.post(`https://65958c3804335332df82f0ba.mockapi.io/sneakers/2/favorites`, obj)
-                setFavorites((prevState)=>[...prevState, data])
+                setFavorites((prevState) => [...prevState, data])
             }
-        }
-        catch (error){
+        } catch (error) {
             alert("Не удалось добавить в favorite")
         }
     }
@@ -84,46 +86,54 @@ function App() {
         setSearchValue('')
     }
 
+    const isItemAdded = (id) => {
+        return basketItems.some((obj) => Number(obj.id) === Number(id))
+    }
 
 
     return (
         <div className="wrapper">
+            <AppContext.Provider value={{
+                data,
+                basketItems,
+                favorites,
+                isItemAdded,
+                setBasketOpen,
+                setBasketItems
+            }}>
+                {isBasketOpen && <Drawer items={basketItems}
+                                         closeBasket={() => setBasketOpen(false)}
+                                         deleteFromBasket={removeFromBasket}
+                />}
 
-            {isBasketOpen && <Drawer items={basketItems}
-                                     closeBasket={() => setBasketOpen(false)}
-                                     deleteFromBasket={removeFromBasket}
-            />}
+                <Header openBasket={() => setBasketOpen(true)}/>
 
-            <Header openBasket={() => setBasketOpen(true)}/>
+                <Routes>
+                    <Route path='/' exact
+                           element={
+                               <Home
+                                   data={data}
+                                   basketItems={basketItems}
+                                   searchValue={searchValue}
+                                   onChangeSearchInput={onChangeSearchInput}
+                                   deleteInputValue={deleteInputValue}
+                                   onAddToBasket={onAddToBasket}
+                                   onAddToFavorite={onAddToFavorite}
+                                   isItemInBasket={isItemInBasket}
+                                   isLoading={isLoading}
+                               />
+                           }
+                    />
 
-            <Routes>
-                <Route path='/' exact
-                    element={
-                        <Home
-                            data={data}
-                            basketItems={basketItems}
-                            searchValue={searchValue}
-                            onChangeSearchInput={onChangeSearchInput}
-                            deleteInputValue={deleteInputValue}
-                            onAddToBasket={onAddToBasket}
-                            onAddToFavorite={onAddToFavorite}
-                            isItemInBasket={isItemInBasket}
-                            isLoading={isLoading}
-                        />
-                    }
-                />
-
-                <Route path='/favorites' exact
-                    element={
-                        <Favorites
-                            items={favorites}
-                            onAddToFavorite={onAddToFavorite}
-                            onAddToBasket={onAddToBasket}/>
-                    }
-                />
-            </Routes>
-
-
+                    <Route path='/favorites' exact
+                           element={
+                               <Favorites
+                                   onAddToFavorite={onAddToFavorite}
+                                   onAddToBasket={onAddToBasket}/>
+                           }
+                    />
+                </Routes>
+            </AppContext.Provider>
         </div>
     );
 }

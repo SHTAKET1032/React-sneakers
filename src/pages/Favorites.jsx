@@ -1,11 +1,15 @@
-
+import React,{useContext} from "react";
 import SneakerCard from "../components/Sneaker-card/Sneaker-card";
+import {AppContext} from "../App";
+
 // import {useEffect} from "react";
 
-function Favorites({items, onAddToFavorite, onAddToBasket}) {
-    // useEffect(()=>{
-    //     console.log(items)
-    // }, [])
+function Favorites({onAddToFavorite, onAddToBasket}) {
+    // const stateContext = useContext(AppContext)
+    // console.log(stateContext)
+    const {favorites} = useContext(AppContext)
+    console.log(favorites)
+
     return (
         <div className="content">
 
@@ -17,15 +21,15 @@ function Favorites({items, onAddToFavorite, onAddToBasket}) {
             </div>
 
             <div className="sneakers-list">
-                {items.length < 1 ? (
+                {favorites.length < 1 ? (
                     "Тут будут мои закладки"
                 ) : (
-                    items.map(({id, name, price, imageUrl}) => (
+                    favorites.map(({id, name, price, imgUrl}) => (
                         <SneakerCard
                             key={id}
                             name={name}
                             price={price}
-                            imageUrl={imageUrl}
+                            imgUrl={imgUrl}
                             id={id}
                             liked={true}
                             onClickAdd={onAddToBasket}

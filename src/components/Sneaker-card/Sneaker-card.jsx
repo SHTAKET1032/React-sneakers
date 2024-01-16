@@ -2,7 +2,7 @@ import React from "react";
 import ContentLoader from "react-content-loader"
 
 import style from "./SneakerCard.module.scss"
-import {useEffect, useState} from "react";
+import { useState} from "react";
 
 
 function SneakerCard({
@@ -14,18 +14,19 @@ function SneakerCard({
                          onClickAdd,
                          isAddedToBasket,
                          liked = false,
-                         loading = false
+                         loading = false,
+                         added
                      }) {
 
-    const [isAdded, setIsAdded] = useState(isAddedToBasket);
+    // const [isAdded, setIsAdded] = useState(isAddedToBasket);
     const [isLiked, setIsLiked] = useState(liked)
 
 
     const onClickPlus = () => {
-        if (isAdded) {
+        if (added) {
             return
         }
-        setIsAdded(true);
+        // setIsAdded(true);
         onClickAdd({imgUrl, name, price, id});
     }
 
@@ -37,9 +38,9 @@ function SneakerCard({
         onAddToFavorite({imgUrl, name, price, id})
     }
 
-    useEffect(() => {
-        setIsAdded(isAddedToBasket)
-    }, [isAddedToBasket])
+    // useEffect(() => {
+    //     setIsAdded(isAddedToBasket)
+    // }, [isAddedToBasket])
 
 
     return (
@@ -83,7 +84,7 @@ function SneakerCard({
 
 
                         <img
-                            src={!isAdded ? "/icons/plus.svg" : "/icons/added.svg"}
+                            src={!added ? "/icons/plus.svg" : "/icons/added.svg"}
                             alt="plus-icon"
                             className={style.btnPlus}
                             onClick={onClickPlus}

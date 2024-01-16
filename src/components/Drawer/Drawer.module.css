@@ -16,7 +16,7 @@
   width: 385px;
   right: 0;
   opacity: 1;
-  background: #FFF;
+  background: #d58c2b;
   box-shadow: -10px 4px 24px 0px rgba(0, 0, 0, 0.1);
 }
 .overlay .drawer .drawerTitle {
@@ -96,6 +96,11 @@
   right: 35px;
   transition: transform 0.5s ease-in-out;
 }
+.checkoutBtn:disabled {
+  background-color: #bebebe;
+  cursor: default;
+  animation: btn-loading 0.6s ease-in-out infinite;
+}
 .checkoutBtn:hover .arrowIcon {
   transform: translateX(10px);
 }
@@ -127,6 +132,18 @@
 }
 .emptyBasket .checkoutBtn:hover .arrowIcon {
   transform: translateX(-10px);
+}
+
+@keyframes btn-loading {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+  1000% {
+    opacity: 1;
+  }
 }
 
 /*# sourceMappingURL=Drawer.module.css.map */

@@ -69,6 +69,9 @@
 //
 // export default Home;
 
+import React, {useContext} from "react";
+
+import {AppContext} from "../App";
 import SneakerCard from "../components/Sneaker-card/Sneaker-card";
 
 
@@ -83,6 +86,10 @@ function Home({
                   isLoading,
                   basketItems
               }) {
+
+
+    const {isItemAdded} = useContext(AppContext)
+
     const renderItems = () => {
         const filtredItems = data.filter((item) =>
             item.name.toLowerCase().includes(searchValue.toLowerCase())
@@ -93,6 +100,7 @@ function Home({
                     key={index}
                     onAddToFavorite={onAddToFavorite}
                     onClickAdd={onAddToBasket}
+                    added={isItemAdded(item?.id)}
                     loading={isLoading}
                     name={item?.name || 'Default Name'}
                     price={item?.price || 0}
