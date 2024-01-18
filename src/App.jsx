@@ -6,6 +6,7 @@ import Header from "./components/Header/Header";
 import Drawer from "./components/Drawer/Drawer";
 import Home from "./pages/Home";
 import Favorites from "./pages/Favorites";
+import Orders from "./pages/Orders";
 
 export const AppContext = React.createContext({})
 
@@ -91,9 +92,9 @@ function App() {
     }
 
 
-    const priceOfAllItemsInBasket = basketItems.reduce((accum, item)=>{
-        return accum + item.price
-    }, 0)
+    // const priceOfAllItemsInBasket = basketItems.reduce((accum, item)=>{
+    //     return accum + item.price
+    // }, 0)
 
 
     return (
@@ -105,7 +106,7 @@ function App() {
                 isItemAdded,
                 setBasketOpen,
                 setBasketItems,
-                priceOfAllItemsInBasket
+                // priceOfAllItemsInBasket
             }}>
                 {isBasketOpen && <Drawer items={basketItems}
                                          closeBasket={() => setBasketOpen(false)}
@@ -136,6 +137,12 @@ function App() {
                                <Favorites
                                    onAddToFavorite={onAddToFavorite}
                                    onAddToBasket={onAddToBasket}/>
+                           }
+                    />
+
+                    <Route path='/orders' exact
+                           element={
+                               <Orders/>
                            }
                     />
                 </Routes>

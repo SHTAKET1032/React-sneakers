@@ -8,7 +8,6 @@ function Favorites({onAddToFavorite, onAddToBasket}) {
     // const stateContext = useContext(AppContext)
     // console.log(stateContext)
     const {favorites} = useContext(AppContext)
-    console.log(favorites)
 
     return (
         <div className="content">

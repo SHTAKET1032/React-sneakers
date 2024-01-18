@@ -61,12 +61,12 @@ function SneakerCard({
                 </ContentLoader>) : (
                 <div className={style.sneakerCard}>
 
-                    <div className={style.favorite}>
+                    {onAddToFavorite &&  <div className={style.favorite}>
                         <img
                             src={!isLiked ? "/icons/heart-default.svg" : "/icons/heart-liked.svg"}
                             alt="heart-unliked"
                             onClick={onClickFavorite}/>
-                    </div>
+                    </div>}
 
                     <img
                         src={imgUrl}
@@ -83,12 +83,12 @@ function SneakerCard({
                         </div>
 
 
-                        <img
+                        {onClickAdd && <img
                             src={!added ? "/icons/plus.svg" : "/icons/added.svg"}
                             alt="plus-icon"
                             className={style.btnPlus}
                             onClick={onClickPlus}
-                        />
+                        />}
 
                     </div>
                 </div>

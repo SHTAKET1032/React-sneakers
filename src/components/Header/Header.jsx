@@ -36,10 +36,12 @@ function Header({openBasket}) {
                             <span className="header-item-txt">Закладки</span>
                         </li>
                     </Link>
+                    <Link to="/orders">
                     <li className="header-list-item">
                         <img src="/icons/profile.svg" alt="icon-profile" className="header-item-svg"/>
                         <span className="header-item-txt">Профиль</span>
                     </li>
+                    </Link>
                 </ul>
             </div>
 
